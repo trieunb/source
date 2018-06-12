@@ -8,7 +8,8 @@
 //import library
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
-import { Container, Text, Content, Icon } from 'native-base';
+import { Container, Text, Content, Icon, Header, Left, Button, Body, Title, Right } from 'native-base';
+import {Actions} from 'react-native-router-flux';
 /*============================================================================*/
 //import Component
 import UserComponent from './../user/components/UserComponent';
@@ -80,6 +81,13 @@ export default class UserTab extends Component{
     ]
     return(
       <Container>
+        <Header>
+          <Right>
+            <Button transparent onPress={() => Actions.login()}>
+              <Icon name="log-out" />
+            </Button>
+          </Right>
+        </Header>
         <Content>
           {
               userList.map(eachUsers => {

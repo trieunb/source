@@ -7,7 +7,7 @@
 /*============================================================================*/
 //import library
 import React, { Component } from 'react';
-import { Container, Text, Content, Icon } from 'native-base';
+import { Container, Text, Content, Icon, Header, Left, Button, Body, Title, Right } from 'native-base';
 /*============================================================================*/
 //export class Main
 export default class MeetingTab extends Component{
@@ -19,11 +19,14 @@ export default class MeetingTab extends Component{
   };
   render() {
     return(
-      <Container style={{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}>
+      <Container>
+        <Header>
+          <Right>
+            <Button transparent>
+              <Icon name="log-out" />
+            </Button>
+          </Right>
+        </Header>
         <Content>
           <Text>This Is Meeting Screen</Text>
         </Content>

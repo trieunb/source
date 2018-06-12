@@ -17,9 +17,9 @@ import OfftimeTab     from './tabs/OfftimeTab';
 /*============================================================================*/
 //export class Main
 export default class Main extends Component{
-	static navigationOptions = {
-		header: () => null
-	}
+	// static navigationOptions = {
+	// 	header: () => null
+	// }
 	render() {
 		return(
 			<MainNavigator></MainNavigator>
