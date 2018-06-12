@@ -8,15 +8,30 @@
 //import library
 import React, { Component } from 'react';
 import {
-  StyleSheet, View, Text, TextInput, TouchableOpacity
+  StyleSheet, View, Text, TextInput, TouchableOpacity, Alert
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 /*============================================================================*/
 //export class FormLogin
 export default class FormLogin extends Component{
-  routeMain() {
-		Actions.main()
-    // console.log(13)
+  constructor(props) {
+    super(props);
+    this.state = {
+      username : '',
+      password : ''
+    },
+    this.doLogin = this.doLogin.bind(this);
+  }
+  doLogin() {
+    const { username, password } = this.state;
+    if (username === '' || password === '') {
+      Alert.alert(
+        'Error!',
+        'user name or password invalid!',
+      )
+    } else {
+      Actions.main();
+    }
 	}
   render() {
     return(
@@ -28,6 +43,8 @@ export default class FormLogin extends Component{
             returnKeyType="next"
             autoCapitalize="none"
             autoCorrect={false}
+            value={this.state.username}
+            onChangeText={text => this.setState({ username: text })}
             onSubmitEditing={() => this.passwordInput.focus()}
           />
           <TextInput
@@ -36,10 +53,12 @@ export default class FormLogin extends Component{
             placeholderTextColor="rgba(255,255,255,0.8)"
             returnKeyType="go"
             secureTextEntry={true}
+            value={this.state.password}
+            onChangeText={text => this.setState({ password: text })}
             ref={(input) => this.passwordInput = input}
           />
           <TouchableOpacity style={styles.btnLogin}
-            onPress={() => Actions.main()}
+            onPress={this.doLogin}
           >
             <Text style={styles.btnText}>LOGIN</Text>
           </TouchableOpacity>

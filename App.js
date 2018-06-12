@@ -17,21 +17,12 @@ import {
 import { Container, Content, Icon, Header, Body } from 'native-base';
 import { createDrawerNavigator, StackNavigator, createStackNavigator, DrawerItems, SafeAreaView } from 'react-navigation';
 //import component
-// import Main   from './src/screens/Main';
-// import Login  from './src/screens/auth/components/Login';
 import Routes from './src/screens/Routes';
-
-// const Navigator = createStackNavigator({
-//   Main: {
-//     screen: Main
-//   }
-// })
 /*============================================================================*/
 //export class App
 export default class App extends Component{
   render() {
     return (
-      // <Navigator />
       <Routes />
     );
   }
