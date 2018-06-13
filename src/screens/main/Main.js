@@ -10,6 +10,8 @@ import React, { Component } from 'react';
 import { Platform }                               from 'react-native';
 import { Container, Text, Content, Icon }         from 'native-base';
 import { createBottomTabNavigator, TabNavigator } from 'react-navigation';
+import { Provider } from 'react-redux';
+import store from '../auth/redux/stores/store';
 //import component
 import UserTab        from './tabs/UserTab';
 import MeetingTab     from './tabs/MeetingTab';
@@ -22,7 +24,9 @@ export default class Main extends Component{
 	// }
 	render() {
 		return(
-			<MainNavigator></MainNavigator>
+			<Provider store={store}>
+				<MainNavigator></MainNavigator>
+			</Provider>
 		);
 	}
 }

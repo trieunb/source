@@ -10,30 +10,36 @@ import React, { Component } from 'react';
 import {
   StyleSheet, View, Text, TextInput, TouchableOpacity, Alert
 } from 'react-native';
+
 import {Actions} from 'react-native-router-flux';
+import { connect } from 'react-redux';
+/*============================================================================*/
+//import redux action
+import { login }  from '../actions/action'
+import styles from '../style';
 /*============================================================================*/
 //export class FormLogin
-export default class FormLogin extends Component{
+class FormLogin extends Component{
   constructor(props) {
     super(props);
     this.state = {
       username : '',
       password : ''
-    },
-    this.doLogin = this.doLogin.bind(this);
+    };
   }
-  doLogin() {
-    const { username, password } = this.state;
-    if (username === '' || password === '') {
+  userLogin() {
+    if (this.state.username === '' || this.state.password === '') {
       Alert.alert(
         'Error!',
         'user name or password invalid!',
       )
     } else {
+      this.props.doLogin(this.state.username, this.state.password)
       Actions.main();
     }
 	}
   render() {
+    // console.log(this.props.isLoggedIn);
     return(
       <View style={styles.container}>
           <TextInput
@@ -44,8 +50,8 @@ export default class FormLogin extends Component{
             autoCapitalize="none"
             autoCorrect={false}
             value={this.state.username}
-            onChangeText={text => this.setState({ username: text })}
-            onSubmitEditing={() => this.passwordInput.focus()}
+            onChangeText={(text) => this.setState({ username: text })}
+            onSubmitEditing={() => this.password.focus()}
           />
           <TextInput
             style={styles.input}
@@ -54,11 +60,11 @@ export default class FormLogin extends Component{
             returnKeyType="go"
             secureTextEntry={true}
             value={this.state.password}
-            onChangeText={text => this.setState({ password: text })}
-            ref={(input) => this.passwordInput = input}
+            onChangeText={(text) => this.setState({ password: text })}
+            ref={(input) => this.password = input}
           />
           <TouchableOpacity style={styles.btnLogin}
-            onPress={this.doLogin}
+            onPress={() => this.userLogin()}
           >
             <Text style={styles.btnText}>LOGIN</Text>
           </TouchableOpacity>
@@ -66,25 +72,17 @@ export default class FormLogin extends Component{
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 20
-  },
-  input: {
-    height: 40,
-    backgroundColor: 'rgba(255,255,255,0.2)',
-    color: '#FFF',
-    marginBottom: 10,
-    paddingHorizontal: 10
-  },
-  btnLogin: {
-    backgroundColor: '#3498db',
-    paddingVertical: 15
-  },
-  btnText: {
-    textAlign: 'center',
-    color: '#FFFFFF',
-    fontWeight: '700'
-  }
-});
+/*============================================================================*/
+//container
+const mapStateToProps = (state, ownProps) => {
+    return {
+        isLoggedIn: state.auth.isLoggedIn
+    };
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        doLogin: (username, password) => { dispatch(login(username, password)); },
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(FormLogin);
+/*============================================================================*/

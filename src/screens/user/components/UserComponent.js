@@ -13,10 +13,14 @@ import {
     Card, CardItem, Thumbnail, Body, Left, Right, Button, List, ListItem
 } from 'native-base';
 import { Image } from 'react-native';
+import { connect } from 'react-redux';
+
+import { logout }  from '../../auth/redux/actions/action'
 /*============================================================================*/
 //export class User component
-export default class UserComponent extends Component {
+class UserComponent extends Component {
   render() {
+    // alert(this.props.isLoggedIn);
     return(
       <List>
         <ListItem>
@@ -32,3 +36,17 @@ export default class UserComponent extends Component {
     );
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+        isLoggedIn: state.auth.isLoggedIn
+    };
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        doLogout: () => { dispatch(logout()); },
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserComponent);

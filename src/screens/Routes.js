@@ -10,8 +10,8 @@ import React, { Component } from 'react';
 import {Router, Stack, Scene} from 'react-native-router-flux';
 /*============================================================================*/
 //import component
-import Login  from './auth/components/Login';
-import Main   from './Main';
+import Login  from './auth/Login';
+import Main   from './main/Main';
 /*============================================================================*/
 //export class
 export default class Routes extends Component<{}> {

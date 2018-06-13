@@ -14,7 +14,10 @@ import {
   KeyboardAvoidingView, TouchableWithoutFeedback,
   Keyboard
 } from 'react-native';
+import { Provider } from 'react-redux';
+
 import FormLogin from './FormLogin';
+import store from './stores/store';
 /*============================================================================*/
 //export class Login
 export default class Login extends Component{
@@ -26,11 +29,12 @@ export default class Login extends Component{
   };
   render() {
     return(
+      <Provider store={store}>
         <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
               <View style={styles.logoContainer}>
                 <Image
                   style={styles.logo}
-                  source={require('../../../images/logo_login.png')}
+                  source={require('../../images/logo_login.png')}
                 />
                 <Text style={styles.title}>
                   Login To Account
@@ -40,6 +44,7 @@ export default class Login extends Component{
                 <FormLogin />
               </View>
         </KeyboardAvoidingView>
+      </Provider>
     )
   }
 }
