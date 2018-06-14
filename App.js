@@ -8,22 +8,32 @@
 //import library
 import React, { Component } from 'react';
 import {
-  View,
-   Text,
-   StyleSheet,
-   ScrollView,
-   Image
-} from 'react-native';
-import { Container, Content, Icon, Header, Body } from 'native-base';
-import { createDrawerNavigator, StackNavigator, createStackNavigator, DrawerItems, SafeAreaView } from 'react-navigation';
+  createDrawerNavigator,
+  StackNavigator,
+  createStackNavigator,
+  DrawerItems,
+  SafeAreaView
+} from 'react-navigation'
+/*============================================================================*/
 //import component
-import Routes from './src/screens/Routes';
+import Login from './src/screens/auth/Login';
+import Drawer from './src/screens/DrawerNavigator';
+
+const MyApp = createStackNavigator({
+  Login: { screen: Login },
+  Home: { screen: Drawer },
+},{
+    // Default config for all screens
+    headerMode: 'none',
+    title: 'Main',
+    initialRouteName: 'Login',
+  });
 /*============================================================================*/
 //export class App
 export default class App extends Component{
   render() {
     return (
-      <Routes />
+      <MyApp />
     );
   }
 }

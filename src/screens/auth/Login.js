@@ -15,18 +15,22 @@ import {
   Keyboard
 } from 'react-native';
 import { Provider } from 'react-redux';
+import { Icon, Button, Container, Header, Content, Left } from 'native-base'
 
-import FormLogin from './FormLogin';
+import FormLogin from './components/FormLogin';
 import store from './stores/store';
 /*============================================================================*/
 //export class Login
 export default class Login extends Component{
-  static navigationOptions = ({ navigation }) => {
-    const params = navigation.state.params || {};
-    return {
-      header: () => null
-    };
-  };
+  // static navigationOptions = ({ navigation }) => ({
+  //   title: "Logout",
+  //   drawerLabel: 'Logout',
+  //   drawerIcon: ({ tintColor }) => (
+  //     <Icon name="md-log-out"/>
+  //   ),
+  //   header: () => null,
+  //   drawerLockMode: 'locked-closed'
+  // });
   render() {
     return(
       <Provider store={store}>
