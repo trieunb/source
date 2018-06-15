@@ -10,10 +10,10 @@ import {
 import { Container, Content, Icon, Header, Body, Card, CardItem, Left, Thumbnail } from 'native-base'
 import { createDrawerNavigator, StackNavigator, createStackNavigator, DrawerItems, SafeAreaView  } from 'react-navigation'
 
-import Home from './home/Home';
-import Meeting from './meeting/Meeting';
-import Offtime from './offtime/Offtime';
-import Login from './auth/Login';
+import Home       from '../../screens/home/Home';
+import Meeting    from '../../screens/meeting/Meeting';
+import Offtime    from '../../screens/offtime/Offtime';
+import Login      from '../../screens/login/Login';
 
 const CustomDrawerContentComponent = (props) => (
   <Container>
@@ -21,7 +21,7 @@ const CustomDrawerContentComponent = (props) => (
       <Body style={styles.bodyContainer}>
           <Image
             style={styles.drawerImage}
-            source={require('../images/no_avatar.jpg')} />
+            source={require('../../images/no_avatar.jpg')} />
           <Text style={styles.title}>ANS-ASIA</Text>
       </Body>
     </Header>

@@ -6,17 +6,18 @@
 */
 /*============================================================================*/
 //import library
-import { LOGIN, LOGIN_SUCCESS, LOGOUT } from './types';
+import { LOGIN, LOGOUT } from './actionTypes';
 
-export const login = (payload) => {
-    return {
-        type: LOGIN,
-        payload: payload
-    }
+export const login = (username, password) => {
+  return {
+    type: LOGIN,
+    username: username,
+    password: password,
+  }
 };
 
 export const logout = () => {
-    return {
-        type: LOGOUT
-    };
+  return {
+    type: LOGOUT
+  };
 }

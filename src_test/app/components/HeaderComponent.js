@@ -30,17 +30,13 @@ class HeaderComponent extends Component {
                       // }}
                       // onPress={() => console.log(this.props)}
                     >
-                    <Icon name="ios-menu"
-                      // onPress={() => this.props.drawerOpen()}
-                      // onPress={() => console.log(this.props.drawerOpen)}
-                    />
+                    <Icon name="ios-menu" />
                   </TouchableHighlight>
 
                 </Left>
                 <Body>
                     <Title>{this.props.title}</Title>
                 </Body>
-                {/* <Right /> */}
             </Header>
         );
     }

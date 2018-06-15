@@ -15,20 +15,7 @@ import {
   SafeAreaView
 } from 'react-navigation'
 /*============================================================================*/
-//import component
-import Login from './src_test/screens/auth/Login';
-import Drawer from './src_test/screens/DrawerNavigator';
-
-const MyApp = createStackNavigator({
-  Login: { screen: Login },
-  Home: { screen: Drawer },
-},{
-    // Default config for all screens
-    headerMode: 'none',
-    title: 'Main',
-    initialRouteName: 'Login',
-  });
-/*============================================================================*/
+import MyApp from './src_test/app/App';
 //export class App
 export default class App extends Component{
   render() {

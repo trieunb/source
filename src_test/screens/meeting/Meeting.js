@@ -17,7 +17,7 @@ import {
 import { Icon, Button, Container, Header, Content, Left } from 'native-base'
 /*============================================================================*/
 //import component
-import HeaderComponent from '../HeaderComponent'
+import HeaderComponent from '../../app/components/HeaderComponent'
 
 class Meeting extends Component {
   static navigationOptions = ({ navigation }) => ({

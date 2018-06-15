@@ -6,38 +6,30 @@
 */
 /*============================================================================*/
 //import library
-import { LOGIN, LOGIN_SUCCESS, LOGOUT } from '../actions/types';
+import { LOGIN, LOGOUT } from '../actions/actionTypes';
 
 const defaultState = {
-    isLoggedIn : false,
-    user : {
-        username: '',
-        password: ''
-    }
+    isLoggedIn: false,
+    username: '',
+    password: ''
 };
 
 const  authReducer = (state = {}, action) => {
-    switch (action.type) {
-        case LOGIN:
-            return {
-                isLoggedIn: true,
-                user : {
-                    username: action.payload.username,
-                    password: action.payload.username
-                }
-            };
-            break;
-        case LOGIN_SUCCESS:
-            break;
-        case LOGOUT:
-            return {
-                isLoggedIn: false,
-                user : {
-                    username: '',
-                    password: '',
-                }
-            };
-        break;
+  switch (action.type) {
+    case LOGIN:
+      return {
+        isLoggedIn: true,
+        username: action.username,
+        password: action.password,
+      };
+      break;
+    case LOGOUT:
+      return {
+        isLoggedIn: false,
+        username: '',
+        password: '',
+      };
+      break;
     default:
       return state
   }
