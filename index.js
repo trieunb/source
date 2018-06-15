@@ -6,10 +6,10 @@
 */
 /*============================================================================*/
 //import library
-import React, { Component } from 'react';
 import { AppRegistry, YellowBox } from 'react-native';
-YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
-//import component
 import App from './App';
+//import component
+
+YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 //register app
 AppRegistry.registerComponent('source', () => App);

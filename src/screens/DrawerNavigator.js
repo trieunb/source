@@ -13,7 +13,7 @@ import { createDrawerNavigator, StackNavigator, createStackNavigator, DrawerItem
 import Home from './home/Home';
 import Meeting from './meeting/Meeting';
 import Offtime from './offtime/Offtime';
-import Login from './auth/Login';
+// import Login from './auth/Login';
 
 const CustomDrawerContentComponent = (props) => (
   <Container>

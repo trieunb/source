@@ -16,8 +16,8 @@ import {
 } from 'react-navigation'
 /*============================================================================*/
 //import component
-import Login from './src/screens/auth/Login';
-import Drawer from './src/screens/DrawerNavigator';
+import Login from './src_test/screens/auth/Login';
+import Drawer from './src_test/screens/DrawerNavigator';
 
 const MyApp = createStackNavigator({
   Login: { screen: Login },

@@ -23,24 +23,24 @@ export default class FormLogin extends Component{
   static navigationOptions = ({ navigation }) => {
     const params = navigation.state.params || {};
   };
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     username : '',
-  //     password : ''
-  //   };
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      username : '',
+      password : ''
+    };
+  }
   userLogin() {
-    // if (this.state.username === '' || this.state.password === '') {
-    //   Alert.alert(
-    //     'Error!',
-    //     'user name or password invalid!',
-    //   )
-    // } else {
-    //   // this.props.doLogin(this.state.username, this.state.password)
-    //   // Actions.main();
-    //   // this.props.navigation.navigate('Home');
-    // }
+    if (this.state.username === '' || this.state.password === '') {
+      Alert.alert(
+        'Error!',
+        'user name or password invalid!',
+      )
+    } else {
+      this.props.doLogin(this.state.username, this.state.password)
+      // Actions.main();
+      // this.props.navigation.navigate('Home');
+    }
     console.log(this.props);
 	}
   render() {
@@ -55,8 +55,8 @@ export default class FormLogin extends Component{
             returnKeyType="next"
             autoCapitalize="none"
             autoCorrect={false}
-            // value={this.state.username}
-            // onChangeText={(text) => this.setState({ username: text })}
+            value={this.state.username}
+            onChangeText={(text) => this.setState({ username: text })}
             onSubmitEditing={() => this.password.focus()}
           />
           <TextInput
@@ -65,8 +65,8 @@ export default class FormLogin extends Component{
             placeholderTextColor="rgba(255,255,255,0.8)"
             returnKeyType="go"
             secureTextEntry={true}
-            // value={this.state.password}
-            // onChangeText={(text) => this.setState({ password: text })}
+            value={this.state.password}
+            onChangeText={(text) => this.setState({ password: text })}
             ref={(input) => this.password = input}
           />
           <TouchableOpacity style={styles.btnLogin}

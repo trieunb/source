@@ -6,42 +6,20 @@
 */
 /*============================================================================*/
 //import library
-import React, { Component } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image
-} from "react-native";
-import { Icon, Button, Container, Header, Content, Left } from 'native-base'
-/*============================================================================*/
-//import component
-import HeaderComponent from '../HeaderComponent'
+import React, { Component } from 'react';
+import { Provider } from 'react-redux';
+import Main from './components/main/main';
+import Layout from '../../common/components/layout/layout';
+//import store from './stores/store';
 
-class Offtime extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: "Offtime",
-    headerLeft: <Icon name="ios-menu" style={{ paddingLeft: 10 }} onPress={() => navigation.navigate('DrawerOpen')} />,
-    drawerLabel: 'Offtime',
-    drawerIcon: ({ tintColor }) => (
-      <Icon name="md-alarm"/>
-    ),
-  })
-  render() {
-    return (
-      <Container>
-        <HeaderComponent title="Offtime" drawerOpen={() => this.props.navigation.navigate('DrawerOpen')} />
-        <Content
-          contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', padding: 10 }}>
-          <Button
-            onPress={() => this.props.navigation.navigate('Home')} full>
-            <Text style={{ color: 'white' }}>Go To Settings Screen</Text>
-          </Button>
-        </Content>
-      </Container>
-    )
-  }
-
+class OfftimeScreen extends Component {
+    render() {
+        return (
+            <Provider /*store = {store}*/>
+                <Main navigation={this.props.navigation}/>
+            </Provider>
+        );
+    }
 }
 
-export default Offtime;
+export default OfftimeScreen;
