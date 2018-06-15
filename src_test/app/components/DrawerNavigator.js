@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import {
-  View,
-   Text,
-   StyleSheet,
-   ScrollView,
-   Image
+  View, Text, StyleSheet,
+  ScrollView, Image
 } from 'react-native';
 
-import { Container, Content, Icon, Header, Body, Card, CardItem, Left, Thumbnail } from 'native-base'
-import { createDrawerNavigator, StackNavigator, createStackNavigator, DrawerItems, SafeAreaView  } from 'react-navigation'
+import {
+  Container, Content, Icon, Header,
+  Body, Card, CardItem, Left, Thumbnail
+} from 'native-base'
+import {
+  createDrawerNavigator, StackNavigator,
+  createStackNavigator, DrawerItems, SafeAreaView
+} from 'react-navigation'
 
 import Home       from '../../screens/home/Home';
 import Meeting    from '../../screens/meeting/Meeting';
