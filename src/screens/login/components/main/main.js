@@ -30,7 +30,7 @@ class Main extends Component<Props> {
                     </Text>
                 </View>
                 <View>
-                    <FormLogin />
+                    <FormLogin navigation={this.props.navigation}/>
                 </View>
             </KeyboardAvoidingView>
         );

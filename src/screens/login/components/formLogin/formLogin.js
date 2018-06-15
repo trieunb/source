@@ -7,9 +7,9 @@
 /*============================================================================*/
 //import library
 import React, { Component } from 'react';
-import { View, Alert } from 'react-native';
+import { View, Alert, Keyboard } from 'react-native';
 import { Button, FormValidationMessage } from 'react-native-elements'
-import FloatingLabel from 'react-native-floating-labels';
+import FloatingLabel from '../../../../common/components/floatingLabel/floatingLabel';
 import { connect } from 'react-redux';
 /*============================================================================*/
 //import redux action
@@ -24,10 +24,11 @@ class FormLogin extends Component<Props>{
         this.password = '';
     }
     userLogin = () => {
+        Keyboard.dismiss;
         if (this.username === '' || this.password === '') {
             Alert.alert(
                 'Error!',
-                'user name or password invalid!',
+                'Username or password invalid!',
             )
         } else {
             this.props.doLogin({
@@ -37,11 +38,18 @@ class FormLogin extends Component<Props>{
         }
 	}
     render() {
+        if(this.props.isLoggedIn){
+            this.props.navigation.navigate('Home', {title : 'Home'});
+        }
+        if(this.props.isLoggedIn == false){
+            Alert.alert(
+                'Error!',
+                'Login failed',
+            )
+        }
         return(
             <View style={styles.container}>
                 <FloatingLabel
-                    labelStyle={styles.labelInput}
-                    inputStyle={styles.formInput}
                     style={styles.input}
                     underlineColorAndroid='transparent'
                     returnKeyType='next'
@@ -51,15 +59,13 @@ class FormLogin extends Component<Props>{
                     onSubmitEditing={() => this.txt_password.focus()}
                 >UserName</FloatingLabel>
                 <FloatingLabel
-                    labelStyle={styles.labelInput}
-                    inputStyle={styles.formInput}
                     style={styles.input}
                     underlineColorAndroid='transparent'
                     autoCapitalize='none'
                     selectTextOnFocus={true}
                     secureTextEntry={true}
                     onChangeText={(text) => this.password = text }
-                    ref={(input) => this.txt_password = input}
+                    inputRef={(input) => this.txt_password = input}
                 >Password</FloatingLabel>
                 <Button
                     buttonStyle={styles.btnLogin}
@@ -80,7 +86,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        doLogin: (payload) => { dispatch(login(payload)); },
+        doLogin: (payload) => {dispatch(login(payload)); },
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(FormLogin);

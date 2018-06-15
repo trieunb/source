@@ -8,7 +8,7 @@ import {
 } from 'react-navigation'
 /*============================================================================*/
 //import component
-import Login from '../screens/login/Login';
+import Login  from '../screens/login/Login';
 import Drawer from './components/DrawerNavigator';
 
 const App = createStackNavigator({

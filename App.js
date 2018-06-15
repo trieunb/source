@@ -7,20 +7,13 @@
 /*============================================================================*/
 //import library
 import React, { Component } from 'react';
-import {
-  createDrawerNavigator,
-  StackNavigator,
-  createStackNavigator,
-  DrawerItems,
-  SafeAreaView
-} from 'react-navigation'
-/*============================================================================*/
-import MyApp from './src_test/app/App';
-//export class App
-export default class App extends Component{
-  render() {
-    return (
-      <MyApp />
-    );
-  }
+import DrawerNavigator from './src/common/drawerNavigator';
+
+
+export default class App extends Component<Props>{
+    render() {
+        return (
+            <DrawerNavigator />
+        );
+    }
 }

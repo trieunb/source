@@ -15,7 +15,8 @@ import store from './stores/store';
 //export class Login
 class LoginScreen extends Layout{
     static navigationOptions = {
-        header: null
+        header: null,
+        drawerLockMode: 'locked-closed'
     }
     render() {
         return(
