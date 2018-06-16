@@ -17,8 +17,10 @@ import {
 import { Provider } from 'react-redux';
 import { Icon, Button, Container, Header, Content, Left } from 'native-base'
 
-import FormLogin from './components/FormLogin';
-import store from './stores/store';
+import FormLogin      from './components/FormLogin';
+import { Wallpaper }  from '../../app/components/Common';
+import store          from './stores/store';
+import bgSrc          from '../../images/header.jpg';
 /*============================================================================*/
 //export class Login
 export default class Login extends Component{
@@ -35,43 +37,10 @@ export default class Login extends Component{
     const { navigation } = this.props;
     return(
       <Provider store={store}>
-        <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
-              <View style={styles.logoContainer}>
-                <Image
-                  style={styles.logo}
-                  source={require('../../images/logo_login.png')}
-                />
-                <Text style={styles.title}>
-                  Login To Account
-                </Text>
-              </View>
-              <View style={styles.formLogin}>
-                <FormLogin route={navigation}/>
-              </View>
-        </KeyboardAvoidingView>
+        <Wallpaper source={bgSrc}>
+            <FormLogin navigation={navigation}/>
+        </Wallpaper>
       </Provider>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#34495e',
-  },
-  logoContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexGrow: 1
-  },
-  logo: {
-    width: 200,
-    height: 200,
-  },
-  title: {
-    fontWeight: 'bold',
-    fontSize: 20,
-    color: '#fff',
-    opacity: 0.8
-  },
-});

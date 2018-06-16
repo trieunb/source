@@ -1,7 +1,8 @@
-/*
-author  :   Trieunb
-created :   2018-06-09
-description: Main Component
+/**
+*| Component      : Header
+*| Author       	: ANS806 - trieunb@ans-asia.com
+*| Created date 	: 2018-06-11
+*| Description   	:
 */
 /*============================================================================*/
 //import library
@@ -14,7 +15,7 @@ import {
     TouchableOpacity
 } from "react-native";
 
-import { Header, Body, Title, Content, Left, Icon, Right } from 'native-base'
+import { Header, Body, Title, Content, Left, Icon, Right, Container } from 'native-base'
 
 class HeaderComponent extends Component {
     render() {
@@ -23,19 +24,14 @@ class HeaderComponent extends Component {
                 <Left>
                   <TouchableHighlight
                       onPress={() => this.props.drawerOpen()}
-                      // onPress={() => {
-                      //   this.props.navigation('DrawerOpen')
-                      //   // const { navigate } = this.props.navigation
-                      //   // navigate('DrawerOpen')
-                      // }}
-                      // onPress={() => console.log(this.props)}
                     >
                     <Icon name="ios-menu" />
                   </TouchableHighlight>
-
                 </Left>
                 <Body>
-                    <Title>{this.props.title}</Title>
+                    <Title>
+                      {this.props.title}
+                    </Title>
                 </Body>
             </Header>
         );

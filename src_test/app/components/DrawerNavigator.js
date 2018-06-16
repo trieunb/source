@@ -7,8 +7,17 @@ import {
    Image
 } from 'react-native';
 
-import { Container, Content, Icon, Header, Body, Card, CardItem, Left, Thumbnail } from 'native-base'
-import { createDrawerNavigator, StackNavigator, createStackNavigator, DrawerItems, SafeAreaView  } from 'react-navigation'
+import {
+  Container, Content, Icon,
+  Header, Body, Card, CardItem,
+  Left, Thumbnail
+} from 'native-base'
+import {
+  createDrawerNavigator, StackNavigator,
+  createStackNavigator, DrawerItems, SafeAreaView
+} from 'react-navigation'
+
+import styles from '../stylesheet/DrawerNavigator';
 
 import Home       from '../../screens/home/Home';
 import Meeting    from '../../screens/meeting/Meeting';
@@ -53,33 +62,3 @@ export default MyApp = createDrawerNavigator({
       drawerCloseRoute: 'DrawerClose',
       drawerToggleRoute: 'DrawerToggle'
     });
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  drawerHeader: {
-    height: 100,
-    backgroundColor: 'white',
-  },
-  bodyContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 10
-  },
-  drawerImage: {
-    height: 80,
-    width: 80,
-    borderRadius: 75,
-    marginLeft: 20
-  },
-  title: {
-    width: 200,
-    marginLeft: 10,
-    fontWeight: '700'
-  }
-})

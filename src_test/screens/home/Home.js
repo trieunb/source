@@ -30,9 +30,10 @@ class Home extends Component {
   })
 
   render() {
+    const {navigation} = this.props;
     return (
       <Container>
-        <HeaderComponent title="Home" drawerOpen={() => this.props.navigation.navigate('DrawerOpen')} />
+        <HeaderComponent title="Home" drawerOpen={() => this.props.navigation.toggleDrawer()} />
         <Content
           contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', padding: 10 }}>
           <Button
