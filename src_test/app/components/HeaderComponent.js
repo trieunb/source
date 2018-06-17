@@ -18,22 +18,38 @@ import {
 import { Header, Body, Title, Content, Left, Icon, Right, Container } from 'native-base'
 
 class HeaderComponent extends Component {
+  static navigationOptions = {
+    header: navigation => ({
+      style: {
+        backgroundColor: 'rgb(47, 54, 61)',
+        shadowOpacity: 0
+      },
+      titleStyle: {
+        color: '#fefefe',
+        fontFamily: 'MuseoSansRounded-300',
+        fontWeight: '300',
+        justifyContent: 'space-between',
+        textAlign: 'center'
+      },
+      tintColor: '#fefefe'
+    })
+  }
     render() {
         return (
-            <Header>
-                <Left>
-                  <TouchableHighlight
-                      onPress={() => this.props.drawerOpen()}
-                    >
-                    <Icon name="ios-menu" />
-                  </TouchableHighlight>
-                </Left>
-                <Body>
-                    <Title>
-                      {this.props.title}
-                    </Title>
-                </Body>
-            </Header>
+          <Header>
+              <Left>
+                <TouchableHighlight
+                    onPress={() => this.props.drawerOpen()}
+                  >
+                  <Icon name="ios-menu" />
+                </TouchableHighlight>
+              </Left>
+              <Body>
+                  <Title>
+                    {this.props.title}
+                  </Title>
+              </Body>
+          </Header>
         );
     }
 }

@@ -21,12 +21,12 @@ import HeaderComponent from '../../app/components/HeaderComponent'
 
 class Home extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: "Home",
-    headerLeft: <Icon name="ios-menu" style={{ paddingLeft: 10 }} onPress={() => navigation.navigate('DrawerOpen')} />,
+    // title: "Hello",
+    // headerLeft: <Icon name="ios-menu" style={{ paddingLeft: 10 }} onPress={() => navigation.navigate('DrawerOpen')} />,
     drawerLabel: 'Home',
     drawerIcon: ({ tintColor }) => (
       <Icon name="md-home"/>
-    ),
+    )
   })
 
   render() {

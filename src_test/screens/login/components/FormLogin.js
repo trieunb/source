@@ -126,7 +126,6 @@ class FormLogin extends Component{
                 <Image source={eyeImg} style={styles.iconEye} />
               </TouchableOpacity>
             </View>
-            {/* <ButtonLogin navigation={this.props} /> */}
             <View style={styles.btnContainer}>
               <Animated.View style={{width: changeWidth}}>
                 <TouchableOpacity
