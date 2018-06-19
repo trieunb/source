@@ -19,7 +19,8 @@ class Main extends Component<Props> {
             <View style={styles.container}>
                 <Button
                     title="Goto Meeting Screen"
-                    backgroundColor="#00bcd4"/>
+                    backgroundColor="#00bcd4"
+                    onPress={() => this.props.navigation.navigate('Meeting', {title : 'Meeting room'})}/>
             </View>
         );
     }

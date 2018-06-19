@@ -31,7 +31,7 @@ class Meeting extends Component {
   render() {
     return (
       <Container>
-        <HeaderComponent title="Meeting" drawerOpen={() => this.props.navigation.navigate('DrawerOpen')} />
+        <HeaderComponent title="Meeting" drawerOpen={() => this.props.navigation.toggleDrawer()} />
         <Content
           contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', padding: 10 }}>
           <Button

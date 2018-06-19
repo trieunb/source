@@ -34,7 +34,7 @@ class Offtime extends Component {
   render() {
     return (
       <Container>
-        <HeaderComponent title="Offtime" drawerOpen={() => this.props.navigation.navigate('DrawerOpen')} />
+        <HeaderComponent title="Offtime" drawerOpen={() => this.props.navigation.toggleDrawer()} />
         <Content
           contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', padding: 10 }}>
           <Button

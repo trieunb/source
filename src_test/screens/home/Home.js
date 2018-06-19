@@ -21,18 +21,19 @@ import HeaderComponent from '../../app/components/HeaderComponent'
 
 class Home extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: "Home",
-    headerLeft: <Icon name="ios-menu" style={{ paddingLeft: 10 }} onPress={() => navigation.navigate('DrawerOpen')} />,
+    // title: "Hello",
+    // headerLeft: <Icon name="ios-menu" style={{ paddingLeft: 10 }} onPress={() => navigation.navigate('DrawerOpen')} />,
     drawerLabel: 'Home',
     drawerIcon: ({ tintColor }) => (
       <Icon name="md-home"/>
-    ),
+    )
   })
 
   render() {
+    const {navigation} = this.props;
     return (
       <Container>
-        <HeaderComponent title="Home" drawerOpen={() => this.props.navigation.navigate('DrawerOpen')} />
+        <HeaderComponent title="Home" drawerOpen={() => this.props.navigation.toggleDrawer()} />
         <Content
           contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', padding: 10 }}>
           <Button

@@ -7,13 +7,13 @@
 /*============================================================================*/
 //import library
 import React, { Component } from 'react';
-import DrawerNavigator from './src/common/drawerNavigator';
-
+// import DrawerNavigator from './src/common/drawerNavigator';
+import MyApp          from './src_test/app/App';
 
 export default class App extends Component<Props>{
     render() {
-        return (
-            <DrawerNavigator />
+        return(
+            <MyApp />
         );
     }
 }

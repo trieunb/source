@@ -7,7 +7,8 @@ import {ScrollView, Text, View} from 'react-native';
 class SideMenu extends Component<Props> {
     navigateToScreen = (route, obj) => () => {
         const navigateAction = NavigationActions.navigate({
-            routeName: route
+            routeName: route,
+            params: obj
         });
         this.props.navigation.dispatch(navigateAction);
     }
