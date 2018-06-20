@@ -6,7 +6,7 @@
 */
 /*============================================================================*/
 //import library
-import { LOGIN, LOGOUT } from '../actions/actionTypes';
+import { LOGIN, LOGOUT } from '../actions/types';
 
 const defaultState = {
     isLoggedIn: false,
@@ -26,8 +26,6 @@ const  authReducer = (state = {}, action) => {
     case LOGOUT:
       return {
         isLoggedIn: false,
-        username: '',
-        password: '',
       };
       break;
     default:

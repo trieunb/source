@@ -18,7 +18,7 @@ const App = createStackNavigator({
     // Default config for all screens
     headerMode: 'none',
     title: 'Main',
-    initialRouteName: 'Login',
+    initialRouteName: 'Home',
   });
 
 export default App;

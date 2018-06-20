@@ -21,12 +21,11 @@ import {
 } from 'react-navigation'
 /*============================================================================*/
 //import redux action
-import { login }      from '../../../app/actions/action'
+import { login }      from '../../../app/actions/authAction'
 import styles         from '../stylesheet/FormLogin';
 
 import { LoginInput } from '../../../app/components/Common';
 import Logo           from './Logo';
-import ButtonLogin    from './ButtonLogin';
 
 import usernameImg    from '../../../images/username.png';
 import passwordImg    from '../../../images/password.png';
@@ -169,7 +168,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        doLogin: (username, password) => { dispatch(login(username, password))},
+        doLogin: (username, password) => { dispatch(login({username, password}))},
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(FormLogin);

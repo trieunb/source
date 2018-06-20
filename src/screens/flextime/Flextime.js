@@ -20,11 +20,11 @@ import HeaderComponent from '../../app/components/HeaderComponent'
 
 class Offtime extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: "Offtime",
+    title: "Flextime",
     // headerLeft: <Icon name="ios-menu" style={{ paddingLeft: 10 }} onPress={() => navigation.navigate('DrawerOpen')} />,
-    drawerLabel: 'Offtime',
+    drawerLabel: 'Flextime',
     drawerIcon: ({ tintColor }) => (
-      <Icon name="md-alarm"/>
+      <Icon name="timer"/>
     ),
     headerTitleStyle: {
         textAlign:"center",
@@ -34,12 +34,12 @@ class Offtime extends Component {
   render() {
     return (
       <Container>
-        <HeaderComponent title="Offtime" drawerOpen={() => this.props.navigation.toggleDrawer()} />
+        <HeaderComponent title="Flextime" drawerOpen={() => this.props.navigation.toggleDrawer()} />
         <Content
           contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', padding: 10 }}>
           <Button
             onPress={() => this.props.navigation.navigate('Home')} full>
-            <Text style={{ color: 'white' }}>Go To Settings Screen</Text>
+            <Text style={{ color: 'white' }}>Go To Home Screen</Text>
           </Button>
         </Content>
       </Container>

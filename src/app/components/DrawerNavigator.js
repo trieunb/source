@@ -21,7 +21,9 @@ import styles from '../stylesheet/DrawerNavigator';
 
 import Home       from '../../screens/home/Home';
 import Meeting    from '../../screens/meeting/Meeting';
-import Offtime    from '../../screens/offtime/Offtime';
+// import Offtime    from '../../screens/offtime/Offtime';
+import Offtime    from '../../screens/offtime/OfftimeStackNavigator';
+import Flextime   from '../../screens/flextime/Flextime';
 import Login      from '../../screens/login/Login';
 
 const CustomDrawerContentComponent = (props) => (
@@ -49,12 +51,23 @@ export default MyApp = createDrawerNavigator({
       screen: Meeting
     },
     Offtime: {
-      screen: Offtime
+      screen: Offtime,
+      navigationOptions: {
+        title: "Offtime",
+        drawerLabel: 'Offtime',
+        drawerIcon: ({ tintColor }) => (
+          <Icon name="md-alarm"/>
+        ),
+      }
+    },
+    Flextime: {
+      screen: Flextime
     },
     Logout: {
       screen: Login
     }
   },{
+      mode: 'card',
       initialRouteName: 'Home',
       drawerPosition: 'left',
       contentComponent: CustomDrawerContentComponent,
