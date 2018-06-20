@@ -7,24 +7,36 @@
 /*============================================================================*/
 //import library
 import React, { Component } from 'react';
-import { Provider } from 'react-redux';
-import Main from './components/main/main';
-import Layout from '../../common/components/layout/layout';
-import store from './stores/store';
+import {
+  StyleSheet,
+  View, Text, Image,
+  SafeAreaView, StatusBar, TextInput,
+  KeyboardAvoidingView, TouchableWithoutFeedback,
+  Keyboard
+} from 'react-native';
+import { Icon, Button, Container, Header, Content, Left } from 'native-base'
+
+import FormLogin      from './components/FormLogin';
+import { Wallpaper }  from '../../app/components/Common';
+import bgSrc          from '../../images/header.jpg';
 /*============================================================================*/
 //export class Login
-class LoginScreen extends Layout{
-    static navigationOptions = {
-        header: null,
-        drawerLockMode: 'locked-closed'
-    }
-    render() {
-        return(
-            <Provider store = {store}>
-                <Main navigation={this.props.navigation}/>
-            </Provider>
-        )
-    }
+export default class Login extends Component{
+  static navigationOptions = ({ navigation }) => ({
+    title: "Logout",
+    drawerLabel: 'Logout',
+    drawerIcon: ({ tintColor }) => (
+      <Icon name="md-log-out"/>
+    ),
+    header: () => null,
+    drawerLockMode: 'locked-closed'
+  });
+  render() {
+    const { navigation } = this.props;
+    return(
+        <Wallpaper source={bgSrc}>
+            <FormLogin navigation={navigation}/>
+        </Wallpaper>
+    )
+  }
 }
-
-export default LoginScreen;

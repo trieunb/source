@@ -13,25 +13,28 @@ import {
   StyleSheet,
   Image
 } from "react-native";
-
 import { Icon, Button, Container, Header, Content, Left } from 'native-base'
 /*============================================================================*/
 //import component
 import HeaderComponent from '../../app/components/HeaderComponent'
 
-class Meeting extends Component {
+class Offtime extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: "Meeting",
-    headerLeft: <Icon name="ios-menu" style={{ paddingLeft: 10 }} onPress={() => navigation.navigate('DrawerOpen')} />,
-    drawerLabel: 'Meeting',
+    title: "Flextime",
+    // headerLeft: <Icon name="ios-menu" style={{ paddingLeft: 10 }} onPress={() => navigation.navigate('DrawerOpen')} />,
+    drawerLabel: 'Flextime',
     drawerIcon: ({ tintColor }) => (
-      <Icon name="md-clock"/>
+      <Icon name="timer"/>
     ),
+    headerTitleStyle: {
+        textAlign:"center",
+        flex:1
+    },
   })
   render() {
     return (
       <Container>
-        <HeaderComponent title="Meeting" drawerOpen={() => this.props.navigation.toggleDrawer()} />
+        <HeaderComponent title="Flextime" drawerOpen={() => this.props.navigation.toggleDrawer()} />
         <Content
           contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', padding: 10 }}>
           <Button
@@ -42,6 +45,7 @@ class Meeting extends Component {
       </Container>
     )
   }
+
 }
 
-export default Meeting;
+export default Offtime;
