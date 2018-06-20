@@ -46,10 +46,10 @@ class FormLogin extends Component{
       press: false,
       isLoading: false,
     };
-    this.showPass = this.showPass.bind(this);
-    this.buttonAnimated = new Animated.Value(0);
-    this.growAnimated = new Animated.Value(0);
-    this._onPress = this._onPress.bind(this);
+    this.showPass         = this.showPass.bind(this);
+    this.buttonAnimated   = new Animated.Value(0);
+    this.growAnimated     = new Animated.Value(0);
+    this._onPress         = this._onPress.bind(this);
   }
   showPass() {
     this.state.press === false
