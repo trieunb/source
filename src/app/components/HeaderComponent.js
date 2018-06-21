@@ -29,7 +29,7 @@ class HeaderComponent extends Component {
                 </TouchableHighlight>
               </Left>
               <Body>
-                  <Title  style={{
+                  <Title style={{
                         width: '150%',
                         textAlign: 'center',
                       }}>
