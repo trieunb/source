@@ -29,7 +29,8 @@ class OfftimeAdd extends Component {
     super(props);
     this.state = {
       selected3: "key3",
-      date:"2016-05-15"
+      date:"2016-05-15",
+      dates:"2016-05-15",
     };
   }
   onValueChange3(value: string) {
@@ -123,7 +124,7 @@ class OfftimeAdd extends Component {
                 width: 200,
                 marginLeft: 20
               }}
-              date={this.state.date}
+              date={this.state.dates}
               mode="date"
               placeholder="Date off"
               format="YYYY/MM/DD"
@@ -144,7 +145,7 @@ class OfftimeAdd extends Component {
                   width:100
                 }
               }}
-              onDateChange={(date) => {this.setState({date: date})}}
+              onDateChange={(date) => {this.setState({dates: date})}}
             />
           </Item>
           <Item floatingLabel style={styles.items}>
