@@ -21,9 +21,31 @@ import {
   Picker, Form
 } from 'native-base'
 import DatePicker from 'react-native-datepicker';
-
+import SectionedMultiSelect from 'react-native-sectioned-multi-select';
 /*============================================================================*/
 //import component
+
+const items = [
+    {
+        name: "Apple",
+        id: 10,
+      },{
+        name: "Strawberry",
+        id: 17,
+      },{
+        name: "Pineapple",
+        id: 13,
+      },{
+        name: "Banana",
+        id: 14,
+      },{
+        name: "Watermelon",
+        id: 15,
+      },{
+        name: "Kiwi fruit",
+        id: 16,
+      }
+]
 class OfftimeAdd extends Component {
   constructor(props) {
     super(props);
@@ -31,7 +53,8 @@ class OfftimeAdd extends Component {
       selected3: "key3",
       date:"2016-05-15",
       dates:"2016-05-15",
-    };
+      selectedItems: []
+    }
   }
   onValueChange3(value: string) {
     this.setState({
@@ -45,8 +68,24 @@ class OfftimeAdd extends Component {
       textAlign: 'center',
     },
   })
+  componentWillMount() {
+    selectedItems = [
+      {
+        name: "Watermelon",
+        id: 15,
+      },{
+        name: "Kiwi fruit",
+        id: 16,
+      }
+    ];
+    this.onSelectedItemsChange(selectedItems);
+  }
+  onSelectedItemsChange = (selectedItems) => {
+    this.setState({ selectedItems });
+  }
 
   render() {
+    const { selectedItems } = this.state;
     return (
       <Container>
         <Content>
@@ -61,11 +100,14 @@ class OfftimeAdd extends Component {
             <Label>Remainning hours</Label>
             <Input />
           </Item>
-          <Item floatingLabel style={styles.items}>
-            <Icon active name='checkmark-circle' />
-            <Label>Approve</Label>
-            <Input />
-          </Item>
+          <SectionedMultiSelect
+            items={items}
+            uniqueKey='id'
+            subKey='children'
+            selectText='Approver...'
+            onSelectedItemsChange={this.onSelectedItemsChange}
+            selectedItems={this.state.selectedItems}
+          />
           <Item style={styles.items}>
             <Label style={{width: 120}}>Date off type</Label>
             <Picker
@@ -156,7 +198,12 @@ class OfftimeAdd extends Component {
           <Item floatingLabel style={styles.items}>
             <Icon active name='alert' />
             <Label>Note</Label>
-            <Input />
+            <Input
+              multiline={true}
+              style={{
+                height: 100,
+              }}
+            />
           </Item>
           <Button block rounded success
               style={styles.btnSave}
