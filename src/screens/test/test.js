@@ -19,6 +19,7 @@ import {
   Content, Left, Item, DatePicker, Form,
   Picker, Fab
 } from 'native-base';
+import { SearchBar } from 'react-native-elements'
 /*============================================================================*/
 //import component
 import HeaderComponent  from '../../app/components/HeaderComponent';
@@ -48,6 +49,11 @@ export default class Test extends Component {
           drawerOpen={() => this.props.navigation.toggleDrawer()}
         />
         <View style={{ flex: 1 }}>
+          <SearchBar
+            round
+            lightTheme
+            icon={{ type: 'font-awesome', name: 'search' }}
+            placeholder='Type Here...' />
           <Fab
             active={this.state.active}
             direction="up"
