@@ -24,6 +24,7 @@ import Meeting    from '../../screens/meeting/Meeting';
 // import Offtime    from '../../screens/offtime/Offtime';
 import Offtime    from '../../screens/offtime/OfftimeStackNavigator';
 import Flextime   from '../../screens/flextime/Flextime';
+import Test       from '../../screens/test/Test';
 import Login      from '../../screens/login/Login';
 
 const CustomDrawerContentComponent = (props) => (
@@ -62,6 +63,9 @@ export default MyApp = createDrawerNavigator({
     },
     Flextime: {
       screen: Flextime
+    },
+    Test: {
+      screen: Test
     },
     Logout: {
       screen: Login
