@@ -11,7 +11,8 @@ import {
   View,
   Text,
   Image,
-  FlatList
+  FlatList,
+  Modal
 } from "react-native";
 
 import {
@@ -31,7 +32,8 @@ export default class Test extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      active: false
+      active: false,
+      modalVisible: false,
     };
   }
   static navigationOptions = ({ navigation }) => ({
@@ -41,6 +43,9 @@ export default class Test extends Component {
       <Icon name="md-clock"/>
     ),
   })
+  setModalVisible(visible) {
+    this.setState({modalVisible: visible});
+  }
   render() {
     return (
       <Container>
@@ -48,6 +53,28 @@ export default class Test extends Component {
           title="Test"
           drawerOpen={() => this.props.navigation.toggleDrawer()}
         />
+        <View style={{marginTop: 22}}>
+        <Modal
+          animationType="slide"
+          transparent={false}
+          visible={this.state.modalVisible}
+          onRequestClose={() => {
+            alert('Modal has been closed.');
+          }}>
+          <View style={{marginTop: 22}}>
+            <View>
+              <Text>Hello World!</Text>
+
+              <TouchableHighlight
+                onPress={() => {
+                  this.setModalVisible(!this.state.modalVisible);
+                }}>
+                <Text>Hide Modal</Text>
+              </TouchableHighlight>
+            </View>
+          </View>
+        </Modal>
+        </View>
         <View style={{ flex: 1 }}>
           <SearchBar
             round
@@ -62,7 +89,12 @@ export default class Test extends Component {
             position="bottomRight"
             onPress={() => this.setState({ active: !this.state.active })}>
             <Icon name="share" />
-            <Button style={{ backgroundColor: '#34A34F' }}>
+            <Button
+              style={{ backgroundColor: '#34A34F' }}
+              onPress={() => {
+                this.setModalVisible(true);
+              }}
+            >
               <Icon name="md-search" />
             </Button>
             <Button style={{ backgroundColor: '#3B5998' }}>
