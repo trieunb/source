@@ -8,17 +8,11 @@
 //import library
 import React, { Component } from "react";
 import {
-  View,
-  Text,
-  Image,
-  FlatList,
-  Modal
+  View, Text, Image, FlatList, Modal, TouchableHighlight, StyleSheet, Dimensions
 } from "react-native";
-
 import {
-  Icon, Button, Container, Header,
-  Content, Left, Item, DatePicker, Form,
-  Picker, Fab
+  Icon, Button, Container, Header, Content, Left, Item, DatePicker, Form,
+  Picker, Fab, Input, Label, Right, Body, Title
 } from 'native-base';
 import { SearchBar } from 'react-native-elements'
 /*============================================================================*/
@@ -26,14 +20,20 @@ import { SearchBar } from 'react-native-elements'
 import HeaderComponent  from '../../app/components/HeaderComponent';
 import testData         from '../../data/test';
 import FlatListItem     from './components/FlatListItem';
+import Search           from './components/SearchModal';
+import Add              from './components/AddModal';
+
+const width   = Dimensions.get('window').width;
+const height  = Dimensions.get('window').height;
 /*============================================================================*/
 //export component
 export default class Test extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      active: false,
-      modalVisible: false,
+      active              : false,
+      modalSearchVisible  : false,
+      modalAddVisible     : false,
     };
   }
   static navigationOptions = ({ navigation }) => ({
@@ -43,8 +43,19 @@ export default class Test extends Component {
       <Icon name="md-clock"/>
     ),
   })
-  setModalVisible(visible) {
-    this.setState({modalVisible: visible});
+  setModalVisible(visible, isModal) {
+    switch (isModal) {
+      case 'Search':
+        this.setState({modalSearchVisible: visible});
+        break;
+      case 'Add':
+        this.setState({modalAddVisible: visible});
+        break;
+      default:
+
+    }
+    // this.setState({modalVisible: visible});
+    // this.setState({modalAddVisible: visible});
   }
   render() {
     return (
@@ -53,27 +64,27 @@ export default class Test extends Component {
           title="Test"
           drawerOpen={() => this.props.navigation.toggleDrawer()}
         />
-        <View style={{marginTop: 22}}>
-        <Modal
-          animationType="slide"
-          transparent={false}
-          visible={this.state.modalVisible}
-          onRequestClose={() => {
-            alert('Modal has been closed.');
-          }}>
-          <View style={{marginTop: 22}}>
-            <View>
-              <Text>Hello World!</Text>
-
-              <TouchableHighlight
-                onPress={() => {
-                  this.setModalVisible(!this.state.modalVisible);
-                }}>
-                <Text>Hide Modal</Text>
-              </TouchableHighlight>
-            </View>
-          </View>
-        </Modal>
+        <View>
+          <Modal
+            animationType="slide"
+            transparent={false}
+            visible={this.state.modalSearchVisible}
+            onRequestClose={() => {
+              alert('Modal has been closed.');
+            }}>
+            <Search showModal={() => {this.setModalVisible(!this.state.modalSearchVisible, 'Search')}}/>
+          </Modal>
+        </View>
+        <View>
+          <Modal
+            animationType="slide"
+            transparent={false}
+            visible={this.state.modalAddVisible}
+            onRequestClose={() => {
+              alert('Modal has been closed.');
+            }}>
+            <Add showModal={() => {this.setModalVisible(!this.state.modalAddVisible, 'Add')}}/>
+          </Modal>
         </View>
         <View style={{ flex: 1 }}>
           <SearchBar
@@ -92,12 +103,17 @@ export default class Test extends Component {
             <Button
               style={{ backgroundColor: '#34A34F' }}
               onPress={() => {
-                this.setModalVisible(true);
+                this.setModalVisible(true, 'Search');
               }}
             >
               <Icon name="md-search" />
             </Button>
-            <Button style={{ backgroundColor: '#3B5998' }}>
+            <Button
+              style={{ backgroundColor: '#3B5998' }}
+              onPress={() => {
+                this.setModalVisible(true, 'Add');
+              }}
+            >
               <Icon name="add-circle" />
             </Button>
           </Fab>
@@ -121,3 +137,7 @@ export default class Test extends Component {
     )
   }
 }
+
+const styles = StyleSheet.create({
+
+});

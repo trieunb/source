@@ -72,7 +72,7 @@ export default MyApp = createDrawerNavigator({
     }
   },{
       mode: 'card',
-      initialRouteName: 'Home',
+      initialRouteName: 'Test',
       drawerPosition: 'left',
       contentComponent: CustomDrawerContentComponent,
       drawerOpenRoute: 'DrawerOpen',
