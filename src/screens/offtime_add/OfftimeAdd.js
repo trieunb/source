@@ -28,22 +28,22 @@ import SectionedMultiSelect from 'react-native-sectioned-multi-select';
 const items = [
     {
         name: "Apple",
-        id: 10,
+        id: 1,
       },{
         name: "Strawberry",
-        id: 17,
+        id: 2,
       },{
         name: "Pineapple",
-        id: 13,
+        id: 3,
       },{
         name: "Banana",
-        id: 14,
+        id: 4,
       },{
         name: "Watermelon",
-        id: 15,
+        id: 5,
       },{
         name: "Kiwi fruit",
-        id: 16,
+        id: 6,
       }
 ]
 class OfftimeAdd extends Component {
@@ -103,7 +103,6 @@ class OfftimeAdd extends Component {
           <SectionedMultiSelect
             items={items}
             uniqueKey='id'
-            subKey='children'
             selectText='Approver...'
             onSelectedItemsChange={this.onSelectedItemsChange}
             selectedItems={this.state.selectedItems}
