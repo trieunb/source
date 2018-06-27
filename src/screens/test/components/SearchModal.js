@@ -16,10 +16,11 @@ import {
 } from 'native-base';
 /*============================================================================*/
 //import component
-import MultiSelect from '../../../app/components/MultiSelect'
+// import MultiSelect from '../../../app/components/MultiSelect'
 
 const width   = Dimensions.get('window').width;
 const height  = Dimensions.get('window').height;
+
 /*============================================================================*/
 //export component
 export default class Search extends Component {
@@ -31,8 +32,6 @@ export default class Search extends Component {
       day           : (new Date).getDate(),
       dateFrom      : '',
       dateTo        : '',
-      selectedItem : null,
-      data: [{key:"key1", label:"label1"}, {key:"key2", label:"label2"}]
     };
   }
   render() {
@@ -102,10 +101,6 @@ export default class Search extends Component {
                 />
               </Item>
             </View>
-            {/* <MultiSelect
-                data={this.state.data}
-                selectedItems={this.state.selectedItem}
-                onValueChange={ (itemValue) => this.setState({selectedItem: itemValue})}/> */}
             <Button block rounded success
                 style={styles.btnSearch}
                 onPress={()=>{console.log('search')}}
