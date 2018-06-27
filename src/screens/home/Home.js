@@ -13,7 +13,7 @@ import {
   StyleSheet,
   Image
 } from "react-native";
-import { Icon, Button, Container, Header, Content, Left } from 'native-base'
+import { Icon, Button, Container, Header, Content, Left, Item } from 'native-base'
 import MultiSelect from 'react-native-multiple-select';
 /*============================================================================*/
 //import component
@@ -45,6 +45,27 @@ const items = [{
   }, {
     id: 'suudydjsjd',
     name: 'Abuja',
+  }, {
+    id: 'sdhyayagj',
+    name: 'Kaduna',
+  }, {
+    id: 'sdhheysdj',
+    name: 'Kaduna',
+  },{
+    id: 'sdhyqesdj',
+    name: 'Kaduna',
+  }, {
+    id: 'sdtyaysdj',
+    name: 'Kaduna',
+  }, {
+    id: 'sdhyakldj',
+    name: 'Kaduna',
+  }, {
+    id: 'sdhyipsdj',
+    name: 'Kaduna',
+  }, {
+    id: 'sdhydsfsdj',
+    name: 'Kaduna',
   }];
 class Home extends Component {
   constructor(props) {
@@ -71,32 +92,32 @@ class Home extends Component {
       <Container>
         <HeaderComponent title="Home" drawerOpen={() => this.props.navigation.toggleDrawer()} />
         <Content>
-        <View style={{ flex: 1 }}>
-          <MultiSelect
-            hideTags
-            items={items}
-            uniqueKey="id"
-            ref={(component) => { this.multiSelect = component }}
-            onSelectedItemsChange={this.onSelectedItemsChange}
-            selectedItems={selectedItems}
-            selectText="Pick Items"
-            searchInputPlaceholderText="Search Items..."
-            onChangeInput={ (text)=> console.log(text)}
-            altFontFamily="ProximaNova-Light"
-            tagRemoveIconColor="#CCC"
-            tagBorderColor="#CCC"
-            tagTextColor="#CCC"
-            selectedItemTextColor="#CCC"
-            selectedItemIconColor="#CCC"
-            itemTextColor="#000"
-            displayKey="name"
-            searchInputStyle={{ color: '#CCC' }}
-            submitButtonColor="#CCC"
-            submitButtonText="Submit"
-          />
-          <View>
-            {this.multiSelect && this.multiSelect.getSelectedItemsExt(selectedItems)}
-          </View>
+        <View style={{ flex: 1}}>
+            <MultiSelect
+              hideTags
+              items={items}
+              uniqueKey="id"
+              ref={(component) => { this.multiSelect = component }}
+              onSelectedItemsChange={this.onSelectedItemsChange}
+              selectedItems={selectedItems}
+              selectText="Pick Items"
+              searchInputPlaceholderText="Search Items..."
+              onChangeInput={ (text)=> console.log(text)}
+              altFontFamily="ProximaNova-Light"
+              tagRemoveIconColor="#CCC"
+              tagBorderColor="#CCC"
+              tagTextColor="#CCC"
+              selectedItemTextColor="#CCC"
+              selectedItemIconColor="#CCC"
+              itemTextColor="#000"
+              displayKey="name"
+              searchInputStyle={{ color: '#CCC' }}
+              submitButtonColor="black"
+              submitButtonText="Submit"
+            />
+            <View>
+              {this.multiSelect && this.multiSelect.getSelectedItemsExt(selectedItems)}
+            </View>
         </View>
         </Content>
       </Container>
@@ -105,3 +126,11 @@ class Home extends Component {
 }
 
 export default Home;
+
+const styles = StyleSheet.create({
+  items: {
+    marginRight: 20,
+    marginLeft: 20,
+    height: 50
+  },
+});
