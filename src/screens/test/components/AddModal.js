@@ -8,25 +8,27 @@
 //import library
 import React, { Component } from "react";
 import {
-  View, Text, Image, FlatList, Modal, TouchableHighlight, StyleSheet, Dimensions
+  View, Text, Image, FlatList, Modal, TouchableHighlight, StyleSheet, Dimensions,
+  KeyboardAvoidingView
 } from "react-native";
 import {
   Icon, Button, Container, Header, Content, Left, Item, DatePicker, Form,
-  Picker, Fab, Input, Label, Right, Body, Title
+  Picker, Fab, Input, Label, Right, Body, Title, ListItem, CheckBox
 } from 'native-base';
 import SectionedMultiSelect from 'react-native-sectioned-multi-select';
 /*============================================================================*/
 //import component
+import { form } from '../../../app/stylesheet/Common';
 
 const width   = Dimensions.get('window').width;
 const height  = Dimensions.get('window').height;
 
 const items = [
   {
-      name: "Apple",
+      name: "Le Quyen Vu",
       id: 10,
     },{
-      name: "Strawberry",
+      name: "Quyen Van Xa",
       id: 17,
     },{
       name: "Pineapple",
@@ -54,11 +56,21 @@ export default class Add extends Component {
       day           : (new Date).getDate(),
       dateFrom      : '',
       dateTo        : '',
-      selectedItems: [],
+      selectedItems : [],
+      selected1     : "key1",
+      checked       : false
     };
   }
   onSelectedItemsChange = (selectedItems) => {
     this.setState({ selectedItems });
+  }
+  onValueChange(value: string) {
+    this.setState({
+      selected1: value
+    });
+  }
+  changeCheckbox(chk) {
+    this.setState({checked:chk})
   }
   render() {
     const { selectedItems } = this.state;
@@ -77,20 +89,18 @@ export default class Add extends Component {
           </Right>
         </Header>
         <Form>
-          <Item floatingLabel style={styles.input}>
+          <Item floatingLabel style={form.input}>
             <Icon active name='person' />
             <Label>Requester</Label>
             <Input />
           </Item>
-          <View style={styles.groupDateFromTo}>
-            <Item style={styles.inputDate}>
+          <View style={form.groupDateFromTo}>
+            <Item style={form.inputDate}>
               <Icon active name='calendar' />
               <DatePicker
                 date={this.state.dateFrom}
                 mode="date"
                 defaultDate={new Date(this.state.year, this.state.month, this.state.day)}
-                // minimumDate={new Date(2018, 1, 1)}
-                // maximumDate={new Date(2018, 12, 31)}
                 locale={"en"}
                 timeZoneOffsetInMinutes={undefined}
                 modalTransparent={false}
@@ -100,14 +110,12 @@ export default class Add extends Component {
                 onDateChange={(date) => {this.setState({dateFrom: date})}}
               />
             </Item>
-            <Item style={styles.inputDate}>
+            <Item style={form.inputDate}>
               <Icon active name='calendar' />
               <DatePicker
                 date={this.state.dateTo}
                 mode="date"
                 defaultDate={new Date(this.state.year, this.state.month, this.state.day)}
-                // minimumDate={new Date(2018, 1, 1)}
-                // maximumDate={new Date(2018, 12, 31)}
                 locale={"en"}
                 timeZoneOffsetInMinutes={undefined}
                 modalTransparent={false}
@@ -118,10 +126,8 @@ export default class Add extends Component {
               />
             </Item>
           </View>
-          <View style={styles.inputSelectMultip}>
-            <Icon active name='person' />
+          <View style={form.inputSelectMultip}>
             <SectionedMultiSelect
-              style={styles.selectMult}
               items={items}
               uniqueKey='id'
               selectText='Choose some things...'
@@ -129,58 +135,60 @@ export default class Add extends Component {
               selectedItems={this.state.selectedItems}
             />
           </View>
-          <Item floatingLabel style={styles.input}>
+          <Item style={form.inputDate}>
+            <Icon active name='calendar' />
+            <DatePicker
+              date={this.state.dateFrom}
+              mode="date"
+              defaultDate={new Date(this.state.year, this.state.month, this.state.day)}
+              locale={"en"}
+              timeZoneOffsetInMinutes={undefined}
+              modalTransparent={false}
+              animationType={"fade"}
+              androidMode={"default"}
+              placeHolderText="Date From"
+              onDateChange={(date) => {this.setState({dateFrom: date})}}
+            />
+          </Item>
+          <Item style={form.input}>
+            <Icon active name='person' />
+            <Picker
+              iosHeader="Select one"
+              mode="dropdown"
+              selectedValue={this.state.selected1}
+              onValueChange={this.onValueChange.bind(this)}
+            >
+              <Picker.Item label="Wallet" value="key0" />
+              <Picker.Item label="ATM Card" value="key1" />
+              <Picker.Item label="Debit Card" value="key2" />
+              <Picker.Item label="Credit Card" value="key3" />
+              <Picker.Item label="Net Banking" value="key4" />
+            </Picker>
+          </Item>
+          <ListItem style={form.input}>
+            <CheckBox
+              checked={this.state.checked}
+              onPress={()=>this.changeCheckbox(!this.state.checked)}
+            />
+            <Body style={form.checkBoxBody}>
+              <Text>Discussion with Client</Text>
+            </Body>
+          </ListItem>
+          <Item floatingLabel style={form.input}>
             <Icon active name='person' />
             <Label>Requester</Label>
             <Input />
           </Item>
           <Button block rounded success
-              style={styles.btn}
+              style={form.btn}
               onPress={()=>{console.log('search')}}
             >
             <Text
-              style={{
-                color: 'white',
-                fontWeight: '700'
-              }}>
-              Search</Text>
+              style={form.btnText}>
+              Save</Text>
           </Button>
         </Form>
       </View>
     )
   }
 }
-
-
-const styles = StyleSheet.create({
-  input: {
-    marginRight: 20,
-    marginLeft: 20,
-  },
-  inputSelectMultip:{
-    top: 50,
-    position: 'relative',
-    paddingTop: 20,
-    paddingBottom: 40,
-    paddingHorizontal: 15
-  },
-  selectMult:{
-    width: 200,
-  },
-  groupDateFromTo:{
-    flex: 1,
-    flexDirection: 'row'
-  },
-  inputDate:{
-    marginRight: 20,
-    marginLeft: 20,
-    height: 50,
-    width: 150
-  },
-  btn: {
-    margin: 20,
-    position: 'relative',
-    top: 50,
-    width: width-'10%',
-  }
-});

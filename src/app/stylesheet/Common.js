@@ -33,3 +33,43 @@ export const wallpaper = StyleSheet.create({
     height: null,
   },
 });
+
+export const form = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  input: {
+    marginRight: 20,
+    marginLeft: 20,
+  },
+  inputSelectMultip:{
+    top: 50,
+    position: 'relative',
+    paddingTop: 20,
+    paddingBottom: 60,
+    paddingHorizontal: 15
+  },
+  groupDateFromTo:{
+    flex: 1,
+    flexDirection: 'row'
+  },
+  inputDate:{
+    marginRight: 20,
+    marginLeft: 20,
+    height: 50,
+    width: 150
+  },
+  checkBoxBody: {
+    marginLeft: 10
+  },
+  btn: {
+    margin: 20,
+    width: DEVICE_WIDTH-'10%',
+  },
+  btnText:{
+    color: 'white',
+    fontWeight: '700'
+  }
+});
