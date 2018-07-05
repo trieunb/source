@@ -14,7 +14,18 @@ const FlatListItem = StyleSheet.create({
   },
   flatListItem: {
     padding: 2,
-    fontSize: 16
+    fontSize: 16,
+  },
+  flatListItemBtn:{
+    width: '58%',
+  },
+  textApprove:{
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    fontSize: 18,
+    padding: 2,
+    color: '#3498db'
   },
   borderLine: {
     height: 2,
@@ -22,7 +33,8 @@ const FlatListItem = StyleSheet.create({
   },
   itemApprove:{
     flex: 1,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    width: '98%',
   },
   textUser:{
     fontWeight: '700'

@@ -1,14 +1,16 @@
 /**
-*| Component      : Action
+*| Component      : Reducer
 *| Author       	: ANS806 - trieunb@ans-asia.com
 *| Created date 	: 2018-06-11
 *| Description   	:
 */
 /*============================================================================*/
 //import library
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from './types';
+import { combineReducers } from 'redux';
+import auth from './authReducer';
 
-export const login = (user_id, password) => ({
-  type: LOGIN_REQUEST,
-  payload: { user_id, password }
+const Reducers = combineReducers({
+  auth,
 });
+
+export default Reducers

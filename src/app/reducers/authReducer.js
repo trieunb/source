@@ -6,30 +6,23 @@
 */
 /*============================================================================*/
 //import library
-import { LOGIN, LOGOUT } from '../actions/types';
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from '../actions/types';
 
 const defaultState = {
-    isLoggedIn: false,
-    username: '',
-    password: ''
+  payload: {},
+  error: null
 };
 
-const  authReducer = (state = {}, action) => {
-  switch (action.type) {
-    case LOGIN:
-      return {
-        isLoggedIn: true,
-        username: action.username,
-        password: action.password,
-      };
-      break;
-    case LOGOUT:
-      return {
-        isLoggedIn: false,
-      };
-      break;
+const  authReducer = (state = defaultState, { type, payload }) => {
+  switch (type) {
+    case LOGIN_SUCCESS: {
+      return { ...state, payload: payload };
+    }
+    case LOGIN_FAILURE: {
+      return { ...state, error: payload }
+    }
     default:
-      return state
+      return state;
   }
 }
 

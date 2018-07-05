@@ -44,6 +44,7 @@ class FormLogin extends Component{
       showPass: true,
       press: false,
       isLoading: false,
+      // token: '',
       username : '',
       password : ''
     };
@@ -93,8 +94,10 @@ class FormLogin extends Component{
         'user name or password invalid!',
       )
     } else {
+          console.log(this.state.username);
           this.props.doLogin(this.state.username, this.state.password);
-          this.props.navigation.navigate('Home');
+          // this.props.navigation.navigate('Home');
+          console.log('token: '+ JSON.stringify(this.props.payload));
       }
   }
   render() {
@@ -163,12 +166,12 @@ class FormLogin extends Component{
 /*============================================================================*/
 const mapStateToProps = (state, ownProps) => {
     return {
-        isLoggedIn: state.auth.isLoggedIn
+        payload: state.auth.payload
     };
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        doLogin: (username, password) => { dispatch(login({username, password}))},
+        doLogin: (username, password) => { dispatch(login(username, password))},
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(FormLogin);

@@ -5,10 +5,8 @@
 *| Description   	:
 */
 /*============================================================================*/
-//import library
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from './types';
-
-export const login = (user_id, password) => ({
-  type: LOGIN_REQUEST,
-  payload: { user_id, password }
-});
+//action type
+export const LOGIN            = 'LOGIN';
+export const LOGOUT           = 'LOGOUT';
+export const LOGIN_SUCCESS    = 'LOGIN_SUCCESS';
+export const LOGIN_ERROR      = 'LOGIN_ERROR';

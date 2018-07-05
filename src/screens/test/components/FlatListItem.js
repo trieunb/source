@@ -11,7 +11,8 @@ import {
   View,
   Text,
   Image,
-  FlatList
+  FlatList,
+  TouchableOpacity
 } from "react-native";
 
 import {
@@ -27,10 +28,16 @@ import styles from '../stylesheet/FlatListItem';
 export default class FlatListItem extends Component{
   render() {
     let icon;
+    let approve;
     if (this.props.item.approve) {
       icon = <Icon name="md-checkmark" style={{fontSize: 20, color: '#3498db', margin: 3}}/>
     } else {
       icon = <Icon name="md-close" style={{fontSize: 20, color: '#e74c3c', margin: 3}}/>
+      approve = <TouchableOpacity style={styles.flatListItemBtn}>
+                  <Text style={styles.textApprove}>
+                    Approve
+                  </Text>
+                </TouchableOpacity>
     }
     return (
       <View style={styles.containerFlatList}>
@@ -60,6 +67,7 @@ export default class FlatListItem extends Component{
               <Text style={styles.flatListItem}>
                 {this.props.item.approve ? 'approved' : 'Chưa approve'}
               </Text>
+              {approve}
             </View>
           </View>
         </View>
