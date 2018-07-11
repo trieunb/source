@@ -10,7 +10,7 @@ import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from '../actions/types';
 
 const defaultState = {
   payload: {},
-  error: null
+  error: {}
 };
 
 const  authReducer = (state = defaultState, { type, payload }) => {

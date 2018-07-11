@@ -44,7 +44,6 @@ class FormLogin extends Component{
       showPass: true,
       press: false,
       isLoading: false,
-      // token: '',
       username : '',
       password : ''
     };
@@ -87,20 +86,28 @@ class FormLogin extends Component{
       easing: Easing.linear,
     }).start();
   }
-  userLogin = () => {
+  userLogin = async() => {
     if (this.state.username === '' || this.state.password === '') {
       Alert.alert(
         'Error!',
         'user name or password invalid!',
       )
     } else {
-          console.log(this.state.username);
-          this.props.doLogin(this.state.username, this.state.password);
-          // this.props.navigation.navigate('Home');
-          console.log('token: '+ JSON.stringify(this.props.payload));
+          await this.props.doLogin(this.state.username, this.state.password);
+          console.log(123);
+          await console.log(JSON.parse(JSON.stringify(this.props.res)));
       }
   }
   render() {
+    // let res = JSON.parse(JSON.stringify(this.props.res));
+    // if (res.status) {
+    //   this.props.navigation.navigate('Test');
+    // } else {
+    //   Alert.alert(
+    //     'Error!',
+    //     'user name or password invalid!',
+    //   )
+    // }
     const changeWidth = this.buttonAnimated.interpolate({
       inputRange: [0, 1],
       outputRange: [DEVICE_WIDTH - MARGIN, MARGIN],
@@ -166,7 +173,7 @@ class FormLogin extends Component{
 /*============================================================================*/
 const mapStateToProps = (state, ownProps) => {
     return {
-        payload: state.auth.payload
+        res: state.auth.payload,
     };
 }
 const mapDispatchToProps = (dispatch) => {

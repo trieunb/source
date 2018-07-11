@@ -9,12 +9,11 @@ export function* doLogin(){
             const action = yield take(LOGIN_REQUEST);
             // console.log(action.payload);
             const checkLogin = yield checkAccount(action.payload);
-            // console.log(checkLogin);
-            let data = checkLogin.data;
-            // console.log(token)
-            yield put({type: LOGIN_SUCCESS, payload: data});
+            var res = checkLogin.data;
+            // console.log(res);
+            yield put({type: LOGIN_SUCCESS, payload: res});
         } catch(error) {
-            yield put({type: LOGIN_FAILED, error: error});
+            yield put({type: LOGIN_FAILURE, error: error});
         }
     }
 }
