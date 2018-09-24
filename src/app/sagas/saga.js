@@ -6,11 +6,14 @@
 */
 /*============================================================================*/
 // import child saga
-import { doLogin } from './authSaga';
+import { doLogin, tokenUser, getUserInfo } from './authSaga';
+import { offtimeSearch } from './offtimeSaga';
 import { fork } from 'redux-saga/effects';
 
 export default function* () {
     yield [
-        fork(doLogin)
+        fork(doLogin),
+        fork(tokenUser),
+        fork(offtimeSearch)
     ]
 }

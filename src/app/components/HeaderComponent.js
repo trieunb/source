@@ -17,29 +17,33 @@ import {
 
 import { Header, Body, Title, Content, Left, Icon, Right, Container } from 'native-base'
 
+// import styles
+import { COLOR_MAIN, styleCommon } from '../../app/stylesheet/Common';
+
 class HeaderComponent extends Component {
     render() {
         return (
-          <Header>
-              <Left>
-                <TouchableHighlight
-                    onPress={() => this.props.drawerOpen()}
-                  >
-                  <Icon name="ios-menu" />
-                </TouchableHighlight>
-              </Left>
-              <Body>
-                  <Title style={{
+            <Header style={styleCommon.header}>
+                <Left>
+                    <TouchableHighlight
+                        onPress={() => this.props.drawerOpen()}
+                    >
+                        <Icon name="ios-menu" style={{color: COLOR_MAIN}}/>
+                    </TouchableHighlight>
+                </Left>
+                <Body>
+                    <Title style={{
                         width: '150%',
                         textAlign: 'center',
-                      }}>
-                    {this.props.title}
-                  </Title>
-              </Body>
-              <Right>
-                {this.props.rightHeader}
-              </Right>
-          </Header>
+                        color: COLOR_MAIN
+                    }}>
+                        {this.props.title}
+                    </Title>
+                </Body>
+                <Right>
+                    {this.props.rightHeader}
+                </Right>
+            </Header>
         );
     }
 }

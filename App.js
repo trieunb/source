@@ -1,6 +1,6 @@
 /**
-*| Component      : App
-*| Author       	: ANS806 - trieunb@ans-asia.com
+*| Component        : App
+*| Author           : ANS806 - trieunb@ans-asia.com
 *| Created date 	: 2018-06-11
 *| Description   	:
 */
@@ -13,12 +13,12 @@ import MyApp          from './src/app/App';
 import { Provider }   from 'react-redux';
 import store          from './src/app/stores/store';
 
-export default class App extends Component<Props>{
+export default class App extends Component {
     render() {
         return(
-          <Provider store={store}>
-            <MyApp />
-          </Provider>
+            <Provider store={store}>
+                <MyApp />
+            </Provider>
         );
     }
 }

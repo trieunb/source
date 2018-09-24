@@ -8,9 +8,10 @@
 //import library
 import { combineReducers } from 'redux';
 import auth from './authReducer';
+import offtime from './offtimeReducer';
 
 const Reducers = combineReducers({
-  auth,
+    auth, offtime
 });
 
 export default Reducers
