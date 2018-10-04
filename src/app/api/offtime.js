@@ -43,3 +43,12 @@ export async function searchOfftimeApi(data) {
         return null;
     }
 }
+
+export async function addDayOffApi(data) {
+    try {
+        return await axios.post('dayoff/add', data);
+    }
+    catch (e) {
+        return null;
+    }
+}

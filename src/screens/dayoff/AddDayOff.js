@@ -32,6 +32,8 @@ import { connect }              from 'react-redux';
 import Moment                   from 'moment';
 import SectionedMultiSelect     from 'react-native-sectioned-multi-select';
 import DateTimePicker           from 'react-native-modal-datetime-picker';
+//import api
+import { addDayOffApi }         from '../../app/api/offtime';
 //import component
 import HeaderComponent          from '../../app/components/HeaderComponent';
 import { ItemDateTimeFromTo }   from '../../app/components/ItemDateTimeFromTo';
@@ -45,7 +47,8 @@ import {
     itemInput,
     itemSelect,
     form,
-    COLOR_MAIN
+    COLOR_MAIN,
+    styleMessageError,
 }   from '../../app/stylesheet/Common';
 // import validate
 import { 
@@ -89,6 +92,7 @@ class AddDayOff extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            isLoading       : false,
             requesterId     : [],
             listDayOffType  : [],
             dayOffType      : [],
@@ -99,7 +103,12 @@ class AddDayOff extends Component {
             note            : '',
             listUser        : [],
             dateHorizontal  : 'row',
-            isValidateDateTime: false
+            errorRequesterId: '',
+            errorDayOffType: '',
+            errorApproverid: '',
+            errorReason: '',
+            errorNote: '',
+            isValidateDateTime: false,
         };
     };
     componentWillMount() {
@@ -176,29 +185,82 @@ class AddDayOff extends Component {
     // render text for item Note
     _renderTextNote = () => {
         var text = '';
-        text = 'Note';
+        text = 'Backup công việc:';
 
         return text;
     };
 
     addDayOff = async () => {
-        let data = await this.getDataRequest();
+        let data    =   await this.getDataRequest();
         console.log(data);
-        // let response = await addDayOffApi(data);
-        // Alert.alert(
-        //     'Save Success!'
-        // )
+        let check   =   await this.checkData(data);
+        if (check) {
+            Alert.alert(
+              'Confirm',
+              'Do you want to Insert DayOff',
+              [
+                {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                {text: 'OK', onPress: () => this.saveData(data)},
+              ],
+              { cancelable: false }
+            )
+        }
     }
-
+    saveData = async(data) => {
+        await Alert.alert('Ok');
+        await this.setState({isLoading : true});
+        let response    =   await addDayOffApi(data);
+        console.log(response);
+        // if (response.data.status) {
+        //     Alert.alert(
+        //       'Success',
+        //       'DayOff have been saved successfully',
+        //       [
+        //         {text: 'OK', onPress: () => this.props.navigation.navigate('Offtime')},
+        //       ],
+        //       { cancelable: false }
+        //     )
+        // }
+        await this.setState({isLoading : false});
+    }
+    checkData(data) {
+        //Trieunb - Update code - 2018/09/10
+        let isValidate = true;
+        this.setState({
+            errorApproverid     : validatejs('required', data.approver_id),
+            errorDayOffType     : validatejs('required', data.dayOffType),
+            errorReason         : validatejs('required', data.reason),
+            errorNote           : validatejs('required', data.note),
+            isValidateDateTime  : true
+        });
+        if (typeof this.state.errorDayOffType !== 'undefined') {
+            isValidate  =    false;
+        }
+        if (typeof this.state.errorApproverid !== 'undefined') {
+            isValidate  =    false;
+        }
+        if (!this.checkDateFromTo(this.state.dateFrom, this.state.dateTo, 'date').status) {
+            isValidate  =    false;
+        }
+        if (typeof this.state.errorReason !== 'undefined') {
+            isValidate  =    false;
+        }
+        if (typeof this.state.errorNote !== 'undefined') {
+            isValidate  =    false;
+        }
+        return isValidate;
+    }
     getDataRequest = () => {
         let data = {
-            requesterId: this.state.requesterId,
-            dayOffType: this.state.dayOffType,
-            approver_id: this.state.approver_id,
-            dateFrom: this.state.dateFrom,
-            dateTo: this.state.dateTo,
-            reason: this.state.reason,
-            note: this.state.note,
+            requesterId     : this.state.requesterId,
+            dayOffType      : this.state.dayOffType,
+            approver_id     : this.state.approver_id,
+            dateFrom        : this.state.dateFrom,
+            dateTo          : this.state.dateTo,
+            reason          : this.state.reason,
+            note            : this.state.note,
+            branch_id       : this.props.branch.branch_id,
+            user_id         : this.state.userInfo.user_id,
         }
         return data;
     }
@@ -231,7 +293,10 @@ class AddDayOff extends Component {
                                         colors={colorsSelect}
                                         styles={{ selectToggle: itemSelect.selectToggle }}
                                         onSelectedItemsChange={(selectedItems) => {
-                                            this.setState({ requesterId: selectedItems });
+                                            this.setState({ 
+                                                requesterId     : selectedItems,
+                                                errorRequesterId: validatejs('required', selectedItems)
+                                            });
                                         }}
                                         selectedItems={this.state.requesterId}
                                     />
@@ -249,7 +314,7 @@ class AddDayOff extends Component {
                             </View>
 
                             {/* Approver */}
-                            <View style={[styleCommon.vItem, styleCommon.border]}>
+                            <View style={[styleCommon.vItem, styleCommon.border, !!this.state.errorApproverid ? styleMessageError.errorBorder : '']}>
                                 <View style={styleCommon.vIcon}>
                                     <Icon active name='people' style={styleCommon.iconFont}/>
                                 </View>
@@ -266,15 +331,20 @@ class AddDayOff extends Component {
                                         colors={colorsSelect}
                                         styles={{ selectToggle: itemSelect.selectToggle }}
                                         onSelectedItemsChange={(selectedItems) => {
-                                            this.setState({ approver_id: selectedItems });
+                                            this.setState({ 
+                                                approver_id: selectedItems,
+                                                errorApproverid: validatejs('required', selectedItems) 
+                                            });
                                         }}
                                         selectedItems={this.state.approver_id}
                                     />
                                 </View>
                             </View>
-
+                            <View style={!!this.state.errorApproverid ? styleMessageError.viewError : styleMessageError.viewNone}>
+                                <Text style={styleMessageError.errorColorText}>{this.state.errorApproverid}</Text>
+                            </View>
                             {/* Date off type */}
-                            <View style={[styleCommon.vItem, styleCommon.border]}>
+                            <View style={[styleCommon.vItem, styleCommon.border, !!this.state.errorDayOffType ? styleMessageError.errorBorder : '']}>
                                 <View style={styleCommon.vIcon}>
                                     <Icon active name='keypad' style={styleCommon.iconFont} />
                                     {/* selectToggleTextColor: */}
@@ -293,23 +363,31 @@ class AddDayOff extends Component {
                                         colors={colorsSelect}
                                         styles={{ selectToggle: itemSelect.selectToggle }}
                                         onSelectedItemsChange={(selectedItems) => {
-                                            this.setState({ dayOffType: selectedItems });
+                                            this.setState({ 
+                                                dayOffType: selectedItems, 
+                                                errorDayOffType: validatejs('required', selectedItems)
+                                            });
                                         }}
                                         selectedItems={this.state.dayOffType}
                                     />
                                 </View>
                             </View>
-
+                            <View style={!!this.state.errorDayOffType ? styleMessageError.viewError : styleMessageError.viewNone}>
+                                <Text style={styleMessageError.errorColorText}>{this.state.errorDayOffType}</Text>
+                            </View>
                             {/* Date From To */}
                             <ItemDateTimeFromTo
                                 textDateTimeFrom={this._renderTextDayOff(this.state.dateFrom, true)}
                                 textDateTimeTo={this._renderTextDayOff(this.state.dateTo, false)}
                                 mode='date'
-                                // datePickerModeAndroid='calendar'
-                                onDateTimeFromSelected={(time) => this.setState({ dateFrom: time, isValidateDateTime: true })}
-                                onDateTimeToSelected={(time) => this.setState({ dateTo: time, isValidateDateTime: true })}
-                                dateFrom={this.state.dateFrom == '' ? new Date() : this.state.dateFrom}
-                                dateTo={this.state.dateTo == '' ? new Date() : this.state.dateTo}
+                                onDateTimeFromSelected={(time) => this.setState({ 
+                                                                    dateFrom: time, 
+                                                                    isValidateDateTime: true })}
+                                onDateTimeToSelected={(time) => this.setState({ 
+                                                                    dateTo: time, 
+                                                                    isValidateDateTime: true })}
+                                dateFrom={this.state.dateFrom}
+                                dateTo={this.state.dateTo}
                                 dateHorizontal={this.state.dateHorizontal}
                                 validate={this.state.isValidateDateTime}
 								valDateFromTo={this.checkDateFromTo}
@@ -319,11 +397,18 @@ class AddDayOff extends Component {
                             <View style={styleCommon.vItem}>
                                 <View style={styleCommon.vTextArea}>
                                     <Textarea
-                                        style={[styleCommon.border, styleCommon.font]}
+                                        style={[styleCommon.border, styleCommon.font, !!this.state.errorReason ? styleMessageError.errorBorder : '']}
                                         rowSpan={3}
                                         placeholder={this._renderTextReason()}
                                         onChangeText={(text) => this.setState({ reason: text })}
-                                        placeholderTextColor={COLOR_TEXT} />
+                                        placeholderTextColor={COLOR_TEXT} 
+                                        onBlur={() => {
+                                            this.setState({
+                                                errorReason: validatejs('required', this.state.reason)
+                                            });
+                                        }}
+                                        />
+                                        <Text style={styleMessageError.errorColorText}>{this.state.errorReason}</Text>
                                 </View>
                             </View>
 
@@ -331,11 +416,18 @@ class AddDayOff extends Component {
                             <View style={styleCommon.vItem}>
                                 <View style={styleCommon.vTextArea}>
                                     <Textarea
-                                        style={[styleCommon.border, styleCommon.font]}
+                                        style={[styleCommon.border, styleCommon.font, !!this.state.errorNote ? styleMessageError.errorBorder : '']}
                                         rowSpan={3}
                                         placeholder={this._renderTextNote()}
                                         onChangeText={(text) => this.setState({ note: text })}
-                                        placeholderTextColor={COLOR_TEXT}/>
+                                        placeholderTextColor={COLOR_TEXT}
+                                        onBlur={() => {
+                                            this.setState({
+                                                errorNote: validatejs('required', this.state.note)
+                                            });
+                                        }}
+                                        />
+                                        <Text style={styleMessageError.errorColorText}>{this.state.errorNote}</Text>
                                 </View>
                             </View>
 
